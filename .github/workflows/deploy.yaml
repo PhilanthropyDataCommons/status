@@ -1,0 +1,154 @@
+# CI: validates pinned versions and Gatus config for both environments.
+# CD: auto-deploys to `test` on push to main; `prod` is manual (workflow_dispatch)
+#     and gated by the `prod` GitHub Environment's required reviewer.
+
+name: Deploy Gatus
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'environments/**'
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy'
+        type: choice
+        options: [test, prod]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Reject floating tags
+        run: |
+          if grep -rE ':latest' environments/*/versions.env; then
+            echo "::error::Pinned versions must not use :latest"
+            exit 1
+          fi
+
+      - name: Validate test config
+        run: |
+          GATUS_VERSION=$(grep GATUS_VERSION environments/test/versions.env | cut -d= -f2)
+          docker run --rm -v "$PWD/environments/test/config.yaml:/config/config.yaml:ro" \
+            "twinproduction/gatus:${GATUS_VERSION}" --validate
+
+      - name: Validate prod config
+        run: |
+          GATUS_VERSION=$(grep GATUS_VERSION environments/prod/versions.env | cut -d= -f2)
+          docker run --rm -v "$PWD/environments/prod/config.yaml:/config/config.yaml:ro" \
+            "twinproduction/gatus:${GATUS_VERSION}" --validate
+
+  deploy-test:
+    needs: validate
+    if: github.event_name == 'push' || inputs.environment == 'test'
+    runs-on: ubuntu-latest
+    environment: test
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Write secrets .env
+        run: |
+          {
+            echo "SLACK_WEBHOOK_URL=${{ secrets.SLACK_WEBHOOK_URL }}"
+            echo "BACKUP_PUSH_TOKEN=${{ secrets.BACKUP_PUSH_TOKEN }}"
+          } > environments/test/.env
+
+      - name: Copy config to VPS
+        uses: appleboy/scp-action@v0.1.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: "environments/test/compose.yaml,environments/test/config.yaml,environments/test/Caddyfile,environments/test/versions.env,environments/test/.env"
+          target: "/opt/gatus/"
+          strip_components: 2
+
+      - name: Deploy
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd /opt/gatus
+            docker compose --env-file versions.env --env-file .env pull
+            docker compose --env-file versions.env --env-file .env up -d
+            echo "${{ github.sha }}" > DEPLOYED_COMMIT
+            date -u +%Y-%m-%dT%H:%M:%SZ >> DEPLOYED_COMMIT
+
+      - name: Verify deploy
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            sleep 5
+            curl -sf http://localhost:8080/health || (docker logs gatus --tail 50 && exit 1)
+
+  deploy-prod:
+    needs: validate
+    if: github.event_name == 'workflow_dispatch' && inputs.environment == 'prod'
+    runs-on: ubuntu-latest
+    environment: prod
+    outputs:
+      deployed: ${{ steps.mark.outputs.deployed }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Write secrets .env
+        run: |
+          {
+            echo "SLACK_WEBHOOK_URL=${{ secrets.SLACK_WEBHOOK_URL }}"
+            echo "BACKUP_PUSH_TOKEN=${{ secrets.BACKUP_PUSH_TOKEN }}"
+          } > environments/prod/.env
+
+      - name: Copy config to VPS
+        uses: appleboy/scp-action@v0.1.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: "environments/prod/compose.yaml,environments/prod/config.yaml,environments/prod/Caddyfile,environments/prod/versions.env,environments/prod/.env"
+          target: "/opt/gatus/"
+          strip_components: 2
+
+      - name: Deploy
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd /opt/gatus
+            docker compose --env-file versions.env --env-file .env pull
+            docker compose --env-file versions.env --env-file .env up -d
+            echo "${{ github.sha }}" > DEPLOYED_COMMIT
+            date -u +%Y-%m-%dT%H:%M:%SZ >> DEPLOYED_COMMIT
+
+      - name: Verify deploy
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            sleep 5
+            curl -sf http://localhost:8080/health || (docker logs gatus --tail 50 && exit 1)
+
+      - id: mark
+        run: echo "deployed=true" >> "$GITHUB_OUTPUT"
+
+  tag-release:
+    needs: deploy-prod
+    if: needs.deploy-prod.outputs.deployed == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0

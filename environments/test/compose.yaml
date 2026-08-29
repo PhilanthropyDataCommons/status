@@ -1,0 +1,15 @@
+services:
+  gatus:
+    image: twinproduction/gatus:latest
+    container_name: gatus
+    restart: always
+    ports:
+      - "127.0.0.1:8080:8080"   # bind localhost only; reverse proxy handles TLS/public exposure
+    volumes:
+      - ./config.yaml:/config/config.yaml:ro
+      - gatus-data:/data
+    env_file:
+      - .env   # secrets like webhook URLs — gitignored, deployed separately (see below)
+
+volumes:
+  gatus-data:
