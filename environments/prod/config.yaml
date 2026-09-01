@@ -10,7 +10,7 @@ alerting:
       Content-Type: "application/x-www-form-urlencoded"
       Authorization: "Basic ${ZULIP_BASIC_AUTH}"
     body: "type=stream&to=PDC&topic=monitoring&content=ALERT:%20[ENDPOINT_NAME]%20status%20changed.%20Check%20the%20status%20page."
-  
+
 endpoints:
   - name: pdc
     url: "https://philanthropydatacommons.org"
@@ -71,16 +71,6 @@ endpoints:
       - type: zulip
         description: "Healthcheck failed for auth.philanthropydatacommons.org"
         send-on-resolved: true   
-
-  - name: pdcauthtest
-    url: "https://auth.test.philanthropydatacommons.org"
-    interval: 600s
-    conditions:
-      - "[STATUS] == 200"
-    alerts:
-      - type: zulip
-        description: "Healthcheck failed for auth.test.philanthropydatacommons.org"
-        send-on-resolved: true
 
   - name: pdcauthtest
     url: "https://auth.test.philanthropydatacommons.org"
