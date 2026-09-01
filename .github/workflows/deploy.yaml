@@ -32,14 +32,18 @@ jobs:
       - name: Validate test config
         run: |
           GATUS_VERSION=$(grep GATUS_VERSION environments/test/versions.env | cut -d= -f2)
-          docker run --rm -v "$PWD/environments/test/config.yaml:/config/config.yaml:ro" \
-            "twinproduction/gatus:${GATUS_VERSION}" --validate
+          docker run --rm \
+            -v "$PWD/environments/test/config.yaml:/config/config.yaml:ro" \
+            -v "$(mktemp -d):/data" \
+            "docker.io/twinproduction/gatus:${GATUS_VERSION}" --validate
 
       - name: Validate prod config
         run: |
           GATUS_VERSION=$(grep GATUS_VERSION environments/prod/versions.env | cut -d= -f2)
-          docker run --rm -v "$PWD/environments/prod/config.yaml:/config/config.yaml:ro" \
-            "twinproduction/gatus:${GATUS_VERSION}" --validate
+          docker run --rm \
+            -v "$PWD/environments/prod/config.yaml:/config/config.yaml:ro" \
+            -v "$(mktemp -d):/data" \
+            "docker.io/twinproduction/gatus:${GATUS_VERSION}" --validate
 
   deploy-test:
     needs: validate
