@@ -32,18 +32,42 @@ jobs:
       - name: Validate test config
         run: |
           GATUS_VERSION=$(grep GATUS_VERSION environments/test/versions.env | cut -d= -f2)
-          docker run --rm \
+          CONTAINER_ID=$(docker run -d \
             -v "$PWD/environments/test/config.yaml:/config/config.yaml:ro" \
             -v "$(mktemp -d):/data" \
-            "docker.io/twinproduction/gatus:${GATUS_VERSION}" --validate
+            "docker.io/twinproduction/gatus:${GATUS_VERSION}")
+          sleep 10
+          LOGS=$(docker logs "$CONTAINER_ID" 2>&1)
+          docker stop "$CONTAINER_ID" >/dev/null
+          echo "$LOGS"
+          if echo "$LOGS" | grep -q "panic:"; then
+            echo "::error::Gatus panicked during startup — see logs above"
+            exit 1
+          fi
+          if ! echo "$LOGS" | grep -q "ValidateEndpointsConfig"; then
+            echo "::error::Gatus never reached config validation — see logs above"
+            exit 1
+          fi
 
       - name: Validate prod config
         run: |
           GATUS_VERSION=$(grep GATUS_VERSION environments/prod/versions.env | cut -d= -f2)
-          docker run --rm \
+          CONTAINER_ID=$(docker run -d \
             -v "$PWD/environments/prod/config.yaml:/config/config.yaml:ro" \
             -v "$(mktemp -d):/data" \
-            "docker.io/twinproduction/gatus:${GATUS_VERSION}" --validate
+            "docker.io/twinproduction/gatus:${GATUS_VERSION}")
+          sleep 10
+          LOGS=$(docker logs "$CONTAINER_ID" 2>&1)
+          docker stop "$CONTAINER_ID" >/dev/null
+          echo "$LOGS"
+          if echo "$LOGS" | grep -q "panic:"; then
+            echo "::error::Gatus panicked during startup — see logs above"
+            exit 1
+          fi
+          if ! echo "$LOGS" | grep -q "ValidateEndpointsConfig"; then
+            echo "::error::Gatus never reached config validation — see logs above"
+            exit 1
+          fi
 
   deploy-test:
     needs: validate
