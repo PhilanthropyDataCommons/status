@@ -5,7 +5,7 @@ storage:
 alerting:
   zulip:
     bot-email: pdc-status-bot@chat.opentechstrategies.com
-    bot-api-key: "********************************"
+    bot-api-key: ${{ secrets.BOT_API_KEY }}
     domain: chat.opentechstrategies.com
 #    channel-id: 123456 
 

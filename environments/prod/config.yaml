@@ -3,12 +3,14 @@ storage:
   path: /data/data.db
 
 alerting:
-  zulip:
-    bot-email: pdc-status-bot@chat.opentechstrategies.com
-    bot-api-key: "********************************"
-    domain: chat.opentechstrategies.com
-#    channel-id: 123456 
-
+  custom:
+    url: "https://chat.opentechstrategies.com/api/v1/messages"
+    method: POST
+    headers:
+      Content-Type: "application/x-www-form-urlencoded"
+      Authorization: "Basic ${ZULIP_BASIC_AUTH}"
+    body: "type=stream&to=PDC&topic=monitoring&content=ALERT:%20[ENDPOINT_NAME]%20status%20changed.%20Check%20the%20status%20page."
+  
 endpoints:
   - name: pdc
     url: "https://philanthropydatacommons.org"

@@ -56,12 +56,12 @@ jobs:
             echo "BACKUP_PUSH_TOKEN=${{ secrets.BACKUP_PUSH_TOKEN }}"
           } > environments/test/.env
 
-      - name: Copy config to VPS
+      - name: Copy config to host
         uses: appleboy/scp-action@v0.1.3
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
           source: "environments/test/compose.yaml,environments/test/config.yaml,environments/test/Caddyfile,environments/test/versions.env,environments/test/.env"
           target: "/opt/gatus/"
           strip_components: 2
@@ -69,9 +69,9 @@ jobs:
       - name: Deploy
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
           script: |
             cd /opt/gatus
             docker compose --env-file versions.env --env-file .env pull
@@ -82,9 +82,9 @@ jobs:
       - name: Verify deploy
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
           script: |
             sleep 5
             curl -sf http://localhost:8080/health || (docker logs gatus --tail 50 && exit 1)
@@ -106,12 +106,12 @@ jobs:
             echo "BACKUP_PUSH_TOKEN=${{ secrets.BACKUP_PUSH_TOKEN }}"
           } > environments/prod/.env
 
-      - name: Copy config to VPS
+      - name: Copy config to host
         uses: appleboy/scp-action@v0.1.3
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
           source: "environments/prod/compose.yaml,environments/prod/config.yaml,environments/prod/Caddyfile,environments/prod/versions.env,environments/prod/.env"
           target: "/opt/gatus/"
           strip_components: 2
@@ -119,9 +119,9 @@ jobs:
       - name: Deploy
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
           script: |
             cd /opt/gatus
             docker compose --env-file versions.env --env-file .env pull
@@ -132,9 +132,9 @@ jobs:
       - name: Verify deploy
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.VPS_HOST }}
-          username: ${{ secrets.VPS_USER }}
-          key: ${{ secrets.VPS_SSH_KEY }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
           script: |
             sleep 5
             curl -sf http://localhost:8080/health || (docker logs gatus --tail 50 && exit 1)
