@@ -18,7 +18,7 @@ endpoints:
     conditions:
       - "[STATUS] == 200"
     alerts:
-      - type: zulip
+      - type: custom
         description: "Healthcheck failed for philanthropydatacommons.org"
         send-on-resolved: true    
 
@@ -28,7 +28,7 @@ endpoints:
     conditions:
       - "[STATUS] == 200"
     alerts:
-      - type: zulip
+      - type: custom
         description: "Healthcheck failed for api.philanthropydatacommons.org"
         send-on-resolved: true      
 
@@ -38,7 +38,7 @@ endpoints:
     conditions:
       - "[STATUS] == 200"
     alerts:
-      - type: zulip
+      - type: custom
         description: "Healthcheck failed for app.philanthropydatacommons.org"
         send-on-resolved: true          
 
@@ -48,7 +48,7 @@ endpoints:
     conditions:
       - "[STATUS] == 200"
     alerts:
-      - type: zulip
+      - type: custom
         description: "Healthcheck failed for admin.philanthropydatacommons.org"
         send-on-resolved: true    
 
@@ -58,7 +58,7 @@ endpoints:
     conditions:
       - "[STATUS] == 200"
     alerts:
-      - type: zulip
+      - type: custom
         description: "Healthcheck failed for exchange.philanthropydatacommons.org"
         send-on-resolved: true
 
@@ -68,7 +68,7 @@ endpoints:
     conditions:
       - "[STATUS] == 200"
     alerts:
-      - type: zulip
+      - type: custom
         description: "Healthcheck failed for auth.philanthropydatacommons.org"
         send-on-resolved: true   
 
@@ -78,7 +78,7 @@ endpoints:
     conditions:
       - "[STATUS] == 200"
     alerts:
-      - type: zulip
+      - type: custom
         description: "Healthcheck failed for auth.test.philanthropydatacommons.org"
         send-on-resolved: true
 
@@ -88,6 +88,6 @@ endpoints:
     conditions:
       - "[STATUS] == 200"
     alerts:
-      - type: zulip
+      - type: custom
         description: "Healthcheck failed for pdc-utilties.opentechstrategies.com"
         send-on-resolved: true              
