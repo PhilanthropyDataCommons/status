@@ -1,3 +1,3 @@
-philanthropydatacommons.org, api.philanthropydatacommons.org, app.philanthropydatacommons.org, admin.philanthropydatacommons.org, exchange.philanthropydatacommons.org, auth.philanthropydatacommons.org, auth.test.philanthropydatacommons.org, pdc-utilities.opentechstrategies.com {
+pdc-status-prod.opentechstrategies.com, status.philanthropydatacommons.org, status.api.philanthropydatacommons.org, status.app.philanthropydatacommons.org, status.admin.philanthropydatacommons.org, status.exchange.philanthropydatacommons.org, status.auth.philanthropydatacommons.org, status.auth.test.philanthropydatacommons.org, status.pdc-utilities.opentechstrategies.com {
     reverse_proxy gatus:8080
 }
