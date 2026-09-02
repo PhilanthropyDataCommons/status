@@ -80,8 +80,8 @@ jobs:
       - name: Write secrets .env
         run: |
           {
-            echo "SLACK_WEBHOOK_URL=${{ secrets.SLACK_WEBHOOK_URL }}"
-            echo "BACKUP_PUSH_TOKEN=${{ secrets.BACKUP_PUSH_TOKEN }}"
+            echo "ZULIP_BASIC_AUTH=${{ secrets.ZULIP_BASIC_AUTH }}"
+            echo "ZULIP_DOMAIN=chat.opentechstrategies.com"
           } > environments/test/.env
 
       - name: Copy config to host
