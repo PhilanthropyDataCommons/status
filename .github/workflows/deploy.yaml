@@ -134,8 +134,9 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            sleep 10
-            curl -sf http://localhost:8080/health || (docker logs gatus --tail 50 && exit 1)
+            sleep 5
+            docker run --rm --network container:gatus curlimages/curl:latest \
+              -sf http://localhost:8080/health || (docker logs gatus --tail 50 && exit 1)
 
   deploy-prod:
     needs: validate
