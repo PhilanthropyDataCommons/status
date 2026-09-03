@@ -178,6 +178,26 @@ jobs:
             echo "${{ github.sha }}" > DEPLOYED_COMMIT
             date -u +%Y-%m-%dT%H:%M:%SZ >> DEPLOYED_COMMIT
 
+      - name: Reload Caddy config
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ vars.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /opt/gatus
+            docker compose exec caddy caddy reload --config /etc/caddy/Caddyfile
+
+      - name: Restart Gatus
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ vars.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /opt/gatus
+            docker compose restart gatus
+
       - name: Verify deploy
         uses: appleboy/ssh-action@v1.0.3
         with:

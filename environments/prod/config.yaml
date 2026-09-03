@@ -32,7 +32,7 @@ endpoints:
         description: "Healthcheck failed for api.philanthropydatacommons.org"
         send-on-resolved: true      
 
-  - name: PDC front end
+  - name: PDC App
     url: "https://app.philanthropydatacommons.org"
     interval: 600s
     conditions:
@@ -42,7 +42,7 @@ endpoints:
         description: "Healthcheck failed for app.philanthropydatacommons.org"
         send-on-resolved: true          
 
-  - name: PDC basefields admin Interface 
+  - name: PDC Admin
     url: "https://admin.philanthropydatacommons.org"
     interval: 600s
     conditions:
