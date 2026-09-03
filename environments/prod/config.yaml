@@ -83,10 +83,10 @@ endpoints:
         send-on-resolved: true
 
   - name: PDC utilities server
-    url: "https://pdc-utilties.opentechstrategies.com"
+    url: "icmp://pdc-utilties.opentechstrategies.com"
     interval: 600s
     conditions:
-      - "[STATUS] == 200"
+     - "[CONNECTED] == true"
     alerts:
       - type: custom
         description: "Healthcheck failed for pdc-utilties.opentechstrategies.com"
