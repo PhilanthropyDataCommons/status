@@ -9,7 +9,7 @@ alerting:
     headers:
       Content-Type: "application/x-www-form-urlencoded"
       Authorization: "Basic ${ZULIP_BASIC_AUTH}"
-    body: "type=stream&to=PDC&topic=monitoring&content=ALERT:%20[ENDPOINT_NAME]%20status%20changed.%20Check%20the%20status%20page."
+    body: "type=stream&to=PDC&topic=monitoring&content=ALERT:%20[ENDPOINT_NAME]%20status%20changed.%20Check%20the%20status%20page: https%3A//pdc-status-test.opentechstrategies.com/"
 
 endpoints:
   - name: PDC main site
