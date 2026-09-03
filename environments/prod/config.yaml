@@ -83,7 +83,7 @@ endpoints:
         send-on-resolved: true
 
   - name: PDC utilities server
-    url: "icmp://pdc-utilties.opentechstrategies.com"
+    url: "icmp://pdc-utilities.opentechstrategies.com"
     interval: 600s
     conditions:
      - "[CONNECTED] == true"
