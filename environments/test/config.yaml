@@ -12,7 +12,7 @@ alerting:
     body: "type=stream&to=PDC&topic=monitoring&content=ALERT:%20[ENDPOINT_NAME]%20status%20changed.%20Check%20the%20status%20page."
 
 endpoints:
-  - name: pdc
+  - name: PDC main site
     url: "https://philanthropydatacommons.org"
     interval: 600s
     conditions:
@@ -22,7 +22,7 @@ endpoints:
         description: "Healthcheck failed for philanthropydatacommons.org"
         send-on-resolved: true    
 
-  - name: pdcapi
+  - name: PDC API
     url: "https://api.philanthropydatacommons.org"
     interval: 600s
     conditions:
@@ -32,7 +32,7 @@ endpoints:
         description: "Healthcheck failed for api.philanthropydatacommons.org"
         send-on-resolved: true      
 
-  - name: pdcapp
+  - name: PDC front end
     url: "https://app.philanthropydatacommons.org"
     interval: 600s
     conditions:
@@ -42,7 +42,7 @@ endpoints:
         description: "Healthcheck failed for app.philanthropydatacommons.org"
         send-on-resolved: true          
 
-  - name: pdcadmin
+  - name: PDC basefields admin Interface 
     url: "https://admin.philanthropydatacommons.org"
     interval: 600s
     conditions:
@@ -52,7 +52,7 @@ endpoints:
         description: "Healthcheck failed for admin.philanthropydatacommons.org"
         send-on-resolved: true    
 
-  - name: pdcexchange
+  - name: PDC Exchange
     url: "https://exchange.philanthropydatacommons.org"
     interval: 600s
     conditions:
@@ -62,7 +62,7 @@ endpoints:
         description: "Healthcheck failed for exchange.philanthropydatacommons.org"
         send-on-resolved: true
 
-  - name: pdcauth
+  - name: PDC Keycloak
     url: "https://auth.philanthropydatacommons.org"
     interval: 600s
     conditions:
@@ -72,7 +72,7 @@ endpoints:
         description: "Healthcheck failed for auth.philanthropydatacommons.org"
         send-on-resolved: true   
 
-  - name: pdcauthtest
+  - name: PDC Keycloak test
     url: "https://auth.test.philanthropydatacommons.org"
     interval: 600s
     conditions:
@@ -82,7 +82,7 @@ endpoints:
         description: "Healthcheck failed for auth.test.philanthropydatacommons.org"
         send-on-resolved: true
 
-  - name: pdcutilities
+  - name: PDC utilities server
     url: "https://pdc-utilties.opentechstrategies.com"
     interval: 600s
     conditions:
