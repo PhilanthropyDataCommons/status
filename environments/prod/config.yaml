@@ -93,9 +93,7 @@ endpoints:
         send-on-resolved: true
 
 ui:
-  title: "PDC Status (test server)"
+  title: "PDC Status (prod server)"
   description: "Live status of Philanthropy Data Commons services"
+  logo: https://philanthropydatacommons.org/wp-content/uploads/2025/11/PDC-Logo.png.webp
   link: "https://philanthropydatacommons.org"
-  buttons:
-    - name: "PDC Homepage"
-      link: "https://philanthropydatacommons.org"
