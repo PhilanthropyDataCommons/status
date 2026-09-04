@@ -113,7 +113,14 @@ ui:
     #global {
       background-color: #ffffff;
       color: #343434;
+    }    
+    #header h1 {
+            color: #343434;
     }
     .endpoint, .endpoint-group {
-      border: 2px solid #1475bb;
+      border: 3px solid #1475bb;
+      color: #343434;
+    }
+    [class*="grid-cols-1"][class*="gap-3"] {
+      grid-template-columns: 1fr !important;
     }
