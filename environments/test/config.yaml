@@ -114,15 +114,15 @@ ui:
   link: "https://philanthropydatacommons.org"
   custom-css: |
     #global {
-      background-color: #ffffff;
-      color: #343434;
-    }    
+      background-color: #ffffff !important;
+      color: #343434 !important;
+    }
     #header h1 {
-            color: #343434;
+      color: #343434 !important;
     }
     .endpoint, .endpoint-group {
-      border: 3px solid #1475bb;
-      color: #343434;
+      border: 2px solid #1475bb !important;
+      color: #343434 !important;
     }
     /* I used this to force the endpoints into a single column, but this makes it so you have to scroll
       to see them all at most zoom levels. 
@@ -151,6 +151,9 @@ ui:
     }
     [class*="hover:bg-green-700"]:hover {
       background-color: #1477bb !important;
+    }
+    [class*="dark:hover:border-gray-700"]:hover {
+      border-color: inherit !important;
     }
     [class*="bg-red-500"] {
       background-color: #f48320 !important;
