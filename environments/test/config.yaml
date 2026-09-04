@@ -13,7 +13,7 @@ alerting:
 
 endpoints:
   - name: PDC main site
-    group: public
+    group: frontend
     url: "https://philanthropydatacommons.org"
     interval: 600s
     conditions:
@@ -24,7 +24,7 @@ endpoints:
         send-on-resolved: true    
 
   - name: PDC App
-    group: public
+    group: frontend
     url: "https://app.philanthropydatacommons.org"
     interval: 600s
     conditions:
@@ -35,7 +35,7 @@ endpoints:
         send-on-resolved: true          
 
   - name: PDC Exchange
-    group: public
+    group: frontend
     url: "https://exchange.philanthropydatacommons.org"
     interval: 600s
     conditions:
@@ -46,7 +46,7 @@ endpoints:
         send-on-resolved: true
 
   - name: PDC Admin
-    group: public
+    group: frontend
     url: "https://admin.philanthropydatacommons.org"
     interval: 600s
     conditions:
@@ -57,7 +57,7 @@ endpoints:
         send-on-resolved: true    
 
   - name: PDC API
-    group: backend
+    group: infra
     url: "https://api.philanthropydatacommons.org"
     interval: 600s
     conditions:
@@ -68,7 +68,7 @@ endpoints:
         send-on-resolved: true      
 
   - name: PDC Keycloak
-    group: backend
+    group: infra
     url: "https://auth.philanthropydatacommons.org"
     interval: 600s
     conditions:
@@ -79,7 +79,7 @@ endpoints:
         send-on-resolved: true   
 
   - name: PDC Keycloak test
-    group: backend
+    group: infra
     url: "https://auth.test.philanthropydatacommons.org"
     interval: 600s
     conditions:
@@ -90,7 +90,7 @@ endpoints:
         send-on-resolved: true
 
   - name: PDC utilities server
-    group: backend
+    group: infra
     url: "icmp://pdc-utilities.opentechstrategies.com"
     interval: 600s
     conditions:
@@ -109,3 +109,11 @@ ui:
   favicon.default: "https://philanthropydatacommons.org/wp-content/uploads/2025/11/cropped-PDC-icon-32x32.png"
   logo: https://philanthropydatacommons.org/wp-content/uploads/2025/11/cropped-PDC-icon-192x192.png
   link: "https://philanthropydatacommons.org"
+  custom-css: |
+    #global {
+      background-color: #ffffff;
+      color: #343434;
+    }
+    .endpoint, .endpoint-group {
+      border: 2px solid #1475bb;
+    }
