@@ -94,6 +94,8 @@ endpoints:
 
 ui:
   title: "PDC Status (test server)"
-  description: "Live status of Philanthropy Data Commons services"
+  header: "PDC Status (test server)"
+  dashboard-heading: "Live status of Philanthropy Data Commons services"
+  dashboard-subheading: ""
   logo: https://philanthropydatacommons.org/wp-content/uploads/2025/11/PDC-Logo.png.webp
   link: "https://philanthropydatacommons.org"
