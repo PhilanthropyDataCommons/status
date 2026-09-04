@@ -106,7 +106,10 @@ ui:
   dashboard-heading: " "
   dashboard-subheading: "Live status of Philanthropy Data Commons services"
   dark-mode: false
-  favicon.size32x32: "https://philanthropydatacommons.org/wp-content/uploads/2025/11/cropped-PDC-icon-32x32.png"
+  favicon:
+    default: "https://philanthropydatacommons.org/wp-content/uploads/2025/11/cropped-PDC-icon-32x32.png"
+    size16x16: "https://philanthropydatacommons.org/wp-content/uploads/2025/11/cropped-PDC-icon-32x32.png"
+    size32x32: "https://philanthropydatacommons.org/wp-content/uploads/2025/11/cropped-PDC-icon-32x32.png"
   logo: https://philanthropydatacommons.org/wp-content/uploads/2025/11/cropped-PDC-icon-192x192.png
   link: "https://philanthropydatacommons.org"
   custom-css: |
