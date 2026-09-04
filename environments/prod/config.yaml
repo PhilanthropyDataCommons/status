@@ -90,4 +90,12 @@ endpoints:
     alerts:
       - type: custom
         description: "Healthcheck failed for pdc-utilties.opentechstrategies.com"
-        send-on-resolved: true              
+        send-on-resolved: true
+
+ui:
+  title: "PDC Status (test server)"
+  description: "Live status of Philanthropy Data Commons services"
+  link: "https://philanthropydatacommons.org"
+  buttons:
+    - name: "PDC Homepage"
+      link: "https://philanthropydatacommons.org"
