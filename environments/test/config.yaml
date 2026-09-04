@@ -13,6 +13,7 @@ alerting:
 
 endpoints:
   - name: PDC main site
+    group: public
     url: "https://philanthropydatacommons.org"
     interval: 600s
     conditions:
@@ -22,17 +23,8 @@ endpoints:
         description: "Healthcheck failed for philanthropydatacommons.org"
         send-on-resolved: true    
 
-  - name: PDC API
-    url: "https://api.philanthropydatacommons.org"
-    interval: 600s
-    conditions:
-      - "[STATUS] == 200"
-    alerts:
-      - type: custom
-        description: "Healthcheck failed for api.philanthropydatacommons.org"
-        send-on-resolved: true      
-
   - name: PDC App
+    group: public
     url: "https://app.philanthropydatacommons.org"
     interval: 600s
     conditions:
@@ -42,17 +34,8 @@ endpoints:
         description: "Healthcheck failed for app.philanthropydatacommons.org"
         send-on-resolved: true          
 
-  - name: PDC Admin
-    url: "https://admin.philanthropydatacommons.org"
-    interval: 600s
-    conditions:
-      - "[STATUS] == 200"
-    alerts:
-      - type: custom
-        description: "Healthcheck failed for admin.philanthropydatacommons.org"
-        send-on-resolved: true    
-
   - name: PDC Exchange
+    group: public
     url: "https://exchange.philanthropydatacommons.org"
     interval: 600s
     conditions:
@@ -62,7 +45,30 @@ endpoints:
         description: "Healthcheck failed for exchange.philanthropydatacommons.org"
         send-on-resolved: true
 
+  - name: PDC Admin
+    group: public
+    url: "https://admin.philanthropydatacommons.org"
+    interval: 600s
+    conditions:
+      - "[STATUS] == 200"
+    alerts:
+      - type: custom
+        description: "Healthcheck failed for admin.philanthropydatacommons.org"
+        send-on-resolved: true    
+
+  - name: PDC API
+    group: backend
+    url: "https://api.philanthropydatacommons.org"
+    interval: 600s
+    conditions:
+      - "[STATUS] == 200"
+    alerts:
+      - type: custom
+        description: "Healthcheck failed for api.philanthropydatacommons.org"
+        send-on-resolved: true      
+
   - name: PDC Keycloak
+    group: backend
     url: "https://auth.philanthropydatacommons.org"
     interval: 600s
     conditions:
@@ -73,6 +79,7 @@ endpoints:
         send-on-resolved: true   
 
   - name: PDC Keycloak test
+    group: backend
     url: "https://auth.test.philanthropydatacommons.org"
     interval: 600s
     conditions:
@@ -83,6 +90,7 @@ endpoints:
         send-on-resolved: true
 
   - name: PDC utilities server
+    group: backend
     url: "icmp://pdc-utilities.opentechstrategies.com"
     interval: 600s
     conditions:
