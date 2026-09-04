@@ -97,7 +97,7 @@ ui:
   header: "PDC Status (test server)"
   dashboard-heading: " "
   dashboard-subheading: "Live status of Philanthropy Data Commons services"
-  dark-mode: "false"
+  dark-mode: false
   favicon.default: "https://philanthropydatacommons.org/wp-content/uploads/2025/11/cropped-PDC-icon-32x32.png"
   logo: https://philanthropydatacommons.org/wp-content/uploads/2025/11/cropped-PDC-icon-192x192.png
   link: "https://philanthropydatacommons.org"
