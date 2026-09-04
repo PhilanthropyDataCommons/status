@@ -106,7 +106,7 @@ ui:
   dashboard-heading: " "
   dashboard-subheading: "Live status of Philanthropy Data Commons services"
   dark-mode: false
-  favicon.default: "https://philanthropydatacommons.org/wp-content/uploads/2025/11/cropped-PDC-icon-32x32.png"
+  favicon.size32x32: "https://philanthropydatacommons.org/wp-content/uploads/2025/11/cropped-PDC-icon-32x32.png"
   logo: https://philanthropydatacommons.org/wp-content/uploads/2025/11/cropped-PDC-icon-192x192.png
   link: "https://philanthropydatacommons.org"
   custom-css: |
@@ -121,6 +121,40 @@ ui:
       border: 3px solid #1475bb;
       color: #343434;
     }
-    [class*="grid-cols-1"][class*="gap-3"] {
-      grid-template-columns: 1fr !important;
+    /* I used this to force the endpoints into a single column, but this makes it so you have to scroll
+      to see them all at most zoom levels. 
+        [class*="grid-cols-1"][class*="gap-3"] {
+          grid-template-columns: 1fr !important;
+    }*/
+    .endpoint-header {
+      padding: 0.3rem 0.5rem !important;
+    }
+    .endpoint-content {
+      padding: 0.3rem 0.5rem !important;
+    }
+    .endpoint-header h3, .endpoint-header h3 span {
+      color: #343434 !important;
+    }
+    /* This statement suppresses the  "Search Endpoints / Filter by / Sort by" bar. Comment out to bring it back. */
+    .lg\:flex-row {
+      display: none !important;
+    }
+    /* The following statements override the default green-for-healthy and red-for-unhealthy colors with PDC blue & orange. */
+    [class*="bg-green-500"] {
+      background-color: #1475bb !important;
+    }
+    [class*="bg-green-400"] {
+      background-color: #ffffff !important;
+    }
+    [class*="hover:bg-green-700"]:hover {
+      background-color: #1477bb !important;
+    }
+    [class*="bg-red-500"] {
+      background-color: #f48320 !important;
+    }
+    [class*="bg-red-400"] {
+      background-color: #f48320 !important;
+    }
+    [class*="hover:bg-red-700"]:hover {
+      background-color: #c47320 !important;
     }
