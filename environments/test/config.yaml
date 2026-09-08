@@ -1,6 +1,7 @@
 storage:
   type: sqlite
   path: /data/data.db
+  maximum-number-of-results: 10000
 
 alerting:
   custom:
