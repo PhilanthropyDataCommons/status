@@ -16,7 +16,7 @@ endpoints:
   - name: PDC main site
     group: frontend
     url: "https://philanthropydatacommons.org"
-    interval: 600s
+    interval: 300s
     conditions:
       - "[STATUS] == 200"
     alerts:
@@ -27,7 +27,7 @@ endpoints:
   - name: PDC App
     group: frontend
     url: "https://app.philanthropydatacommons.org"
-    interval: 600s
+    interval: 300s
     conditions:
       - "[STATUS] == 200"
     alerts:
@@ -38,7 +38,7 @@ endpoints:
   - name: PDC Exchange
     group: frontend
     url: "https://exchange.philanthropydatacommons.org"
-    interval: 600s
+    interval: 300s
     conditions:
       - "[STATUS] == 200"
     alerts:
@@ -49,7 +49,7 @@ endpoints:
   - name: PDC Admin
     group: frontend
     url: "https://admin.philanthropydatacommons.org"
-    interval: 600s
+    interval: 300s
     conditions:
       - "[STATUS] == 200"
     alerts:
@@ -60,7 +60,7 @@ endpoints:
   - name: PDC API
     group: infra
     url: "https://api.philanthropydatacommons.org"
-    interval: 600s
+    interval: 300s
     conditions:
       - "[STATUS] == 200"
     alerts:
@@ -71,7 +71,7 @@ endpoints:
   - name: PDC Keycloak
     group: infra
     url: "https://auth.philanthropydatacommons.org"
-    interval: 600s
+    interval: 300s
     conditions:
       - "[STATUS] == 200"
     alerts:
@@ -82,7 +82,7 @@ endpoints:
   - name: PDC Keycloak test
     group: infra
     url: "https://auth.test.philanthropydatacommons.org"
-    interval: 600s
+    interval: 300s
     conditions:
       - "[STATUS] == 200"
     alerts:
@@ -93,7 +93,7 @@ endpoints:
   - name: PDC utilities server
     group: infra
     url: "icmp://pdc-utilities.opentechstrategies.com"
-    interval: 600s
+    interval: 300s
     conditions:
      - "[CONNECTED] == true"
     alerts:
