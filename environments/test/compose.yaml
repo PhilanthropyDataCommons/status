@@ -1,6 +1,6 @@
 services:
   gatus:
-    image: twinproduction/gatus:latest
+    image: ghcr.io/opentechstrategies/gatus:latest
     container_name: gatus
     restart: always
     volumes:
