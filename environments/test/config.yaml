@@ -113,6 +113,9 @@ ui:
     size32x32: "https://philanthropydatacommons.org/wp-content/uploads/2025/11/cropped-PDC-icon-32x32.png"
   logo: https://philanthropydatacommons.org/wp-content/uploads/2025/11/cropped-PDC-icon-192x192.png
   link: "https://philanthropydatacommons.org"
+  recent-checks-maximum-rows: 21
+  recent-checks-results-per-row: 200
+  recent-checks-result-height: 0.5rem
   custom-css: |
     #global {
       background-color: #ffffff !important;
