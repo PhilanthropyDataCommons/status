@@ -142,6 +142,9 @@ ui:
     .endpoint-header h3, .endpoint-header h3 span {
       color: #343434 !important;
     }
+    .endpoint:hover {
+      transform: none !important;
+    }
     /* This statement suppresses the  "Search Endpoints / Filter by / Sort by" bar. Comment out to bring it back. */
     .lg\:flex-row {
       display: none !important;
