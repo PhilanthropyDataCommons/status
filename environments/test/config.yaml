@@ -172,3 +172,12 @@ ui:
     [class*="hover:bg-red-700"]:hover {
       background-color: #c47320 !important;
     }
+    /* this is intended to prevent truncation of URLs and group tags */
+    .endpoint-header .truncate {
+      white-space: normal !important;
+      overflow: visible !important;
+      text-overflow: unset !important;
+    }
+    .endpoint-header [class*="overflow-hidden"] {
+      overflow: visible !important;
+    }
