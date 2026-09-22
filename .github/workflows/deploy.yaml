@@ -206,7 +206,8 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             sleep 5
-            curl -sf http://localhost:8080/health || (docker logs gatus --tail 50 && exit 1)
+            docker run --rm --network container:gatus curlimages/curl:latest \
+              -sf http://localhost:8080/health || (docker logs gatus --tail 50 && exit 1)
 
       - id: mark
         run: echo "deployed=true" >> "$GITHUB_OUTPUT"
