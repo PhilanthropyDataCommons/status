@@ -1,6 +1,7 @@
 storage:
   type: sqlite
   path: /data/data.db
+  maximum-number-of-results: 10000
 
 alerting:
   custom:
@@ -13,87 +14,178 @@ alerting:
 
 endpoints:
   - name: PDC main site
+    group: frontend
     url: "https://philanthropydatacommons.org"
-    interval: 600s
+    interval: 300s
     conditions:
       - "[STATUS] == 200"
     alerts:
       - type: custom
         description: "Healthcheck failed for philanthropydatacommons.org"
-        send-on-resolved: true    
-
-  - name: PDC API
-    url: "https://api.philanthropydatacommons.org"
-    interval: 600s
-    conditions:
-      - "[STATUS] == 200"
-    alerts:
-      - type: custom
-        description: "Healthcheck failed for api.philanthropydatacommons.org"
-        send-on-resolved: true      
+        send-on-resolved: true
+        failure-threshold: 2    
 
   - name: PDC App
+    group: frontend
     url: "https://app.philanthropydatacommons.org"
-    interval: 600s
+    interval: 300s
     conditions:
       - "[STATUS] == 200"
     alerts:
       - type: custom
         description: "Healthcheck failed for app.philanthropydatacommons.org"
-        send-on-resolved: true          
-
-  - name: PDC Admin
-    url: "https://admin.philanthropydatacommons.org"
-    interval: 600s
-    conditions:
-      - "[STATUS] == 200"
-    alerts:
-      - type: custom
-        description: "Healthcheck failed for admin.philanthropydatacommons.org"
-        send-on-resolved: true    
+        send-on-resolved: true
+        failure-threshold: 2          
 
   - name: PDC Exchange
+    group: frontend
     url: "https://exchange.philanthropydatacommons.org"
-    interval: 600s
+    interval: 300s
     conditions:
       - "[STATUS] == 200"
     alerts:
       - type: custom
         description: "Healthcheck failed for exchange.philanthropydatacommons.org"
         send-on-resolved: true
+        failure-threshold: 2
+
+  - name: PDC Admin
+    group: frontend
+    url: "https://admin.philanthropydatacommons.org"
+    interval: 300s
+    conditions:
+      - "[STATUS] == 200"
+    alerts:
+      - type: custom
+        description: "Healthcheck failed for admin.philanthropydatacommons.org"
+        send-on-resolved: true
+        failure-threshold: 2    
+
+  - name: PDC API
+    group: infra
+    url: "https://api.philanthropydatacommons.org"
+    interval: 300s
+    conditions:
+      - "[STATUS] == 200"
+    alerts:
+      - type: custom
+        description: "Healthcheck failed for api.philanthropydatacommons.org"
+        send-on-resolved: true
+        failure-threshold: 2      
 
   - name: PDC Keycloak
+    group: infra
     url: "https://auth.philanthropydatacommons.org"
-    interval: 600s
+    interval: 300s
     conditions:
       - "[STATUS] == 200"
     alerts:
       - type: custom
         description: "Healthcheck failed for auth.philanthropydatacommons.org"
-        send-on-resolved: true   
+        send-on-resolved: true
+        failure-threshold: 2   
 
   - name: PDC Keycloak test
+    group: infra
     url: "https://auth.test.philanthropydatacommons.org"
-    interval: 600s
+    interval: 300s
     conditions:
       - "[STATUS] == 200"
     alerts:
       - type: custom
         description: "Healthcheck failed for auth.test.philanthropydatacommons.org"
         send-on-resolved: true
+        failure-threshold: 2
 
   - name: PDC utilities server
+    group: infra
     url: "icmp://pdc-utilities.opentechstrategies.com"
-    interval: 600s
+    interval: 300s
     conditions:
      - "[CONNECTED] == true"
     alerts:
       - type: custom
         description: "Healthcheck failed for pdc-utilties.opentechstrategies.com"
         send-on-resolved: true
+        failure-threshold: 2
 
 ui:
-  title: "PDC Status (prod server)"
-  description: "Live status of Philanthropy Data Commons services"
-  logo: https://philanthropydatacommons.org/wp-content/uploads/2025/11/PDC-Logo.png.webp
+  title: "PDC Status"
+  header: "PDC Status"
+  dashboard-heading: " "
+  dashboard-subheading: "Live status of Philanthropy Data Commons services"
+  dark-mode: false
+  favicon:
+    default: "https://philanthropydatacommons.org/wp-content/uploads/2025/11/cropped-PDC-icon-32x32.png"
+    size16x16: "https://philanthropydatacommons.org/wp-content/uploads/2025/11/cropped-PDC-icon-32x32.png"
+    size32x32: "https://philanthropydatacommons.org/wp-content/uploads/2025/11/cropped-PDC-icon-32x32.png"
+  logo: https://philanthropydatacommons.org/wp-content/uploads/2025/11/cropped-PDC-icon-192x192.png
   link: "https://philanthropydatacommons.org"
+  recent-checks-maximum-rows: 21
+  recent-checks-results-per-row: 200
+  recent-checks-result-height: 0.5rem
+  custom-css: |
+    #global {
+      background-color: #ffffff !important;
+      color: #343434 !important;
+    }
+    #header h1 {
+      color: #343434 !important;
+    }
+    .endpoint, .endpoint-group {
+      border: 2px solid #9ca3af !important;
+      color: #343434 !important;
+    }
+    
+    /* I used this to force the endpoints into a single column, but this makes it so you have to scroll
+      to see them all at most zoom levels. 
+        [class*="grid-cols-1"][class*="gap-3"] {
+          grid-template-columns: 1fr !important;
+    }*/
+    .endpoint-header {
+      padding: 0.3rem 0.5rem !important;
+    }
+    .endpoint-content {
+      padding: 0.3rem 0.5rem !important;
+    }
+    .endpoint-header h3, .endpoint-header h3 span {
+      color: #343434 !important;
+    }
+    .endpoint:hover {
+      transform: none !important;
+    }
+    /* This statement suppresses the  "Search Endpoints / Filter by / Sort by" bar. Comment out to bring it back. */
+    .lg\:flex-row {
+      display: none !important;
+    }
+    /* The following statements override the default green-for-healthy and red-for-unhealthy colors with PDC blue & orange. */
+    [class*="bg-green-500"] {
+      background-color: #1475bb !important;
+    }
+    [class*="bg-green-400"] {
+      background-color: #ffffff !important;
+    }
+    [class*="hover:bg-green-700"]:hover {
+      background-color: #1477bb !important;
+    }
+    [class*="dark:hover:border-gray-700"]:hover {
+      border-color: #1475bb !important;
+    }
+    [class*="bg-red-500"] {
+      background-color: #f48320 !important;
+    }
+    [class*="bg-red-400"] {
+      background-color: #f48320 !important;
+    }
+    [class*="hover:bg-red-700"]:hover {
+      background-color: #c47320 !important;
+    }
+    /* this is intended to prevent truncation of URLs and group tags */
+    .endpoint-header .truncate {
+      white-space: normal !important;
+      overflow: visible !important;
+      text-overflow: unset !important;
+    }
+    .endpoint-header [class*="overflow-hidden"] {
+      overflow: visible !important;
+    }
