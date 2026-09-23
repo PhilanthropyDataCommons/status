@@ -90,7 +90,7 @@ endpoints:
     url: "https://auth.test.philanthropydatacommons.org"
     interval: 300s
     conditions:
-      - "[STATUS] == 200"
+      - "[STATUS] == 599"
     alerts:
       - type: custom
         description: "[ALERT_TRIGGERED_OR_RESOLVED]:%20PDC%20Keycloak%20test.%20See:%20https://pdc-status-test.opentechstrategies.com/endpoints/infra_pdc-keycloak-test"
