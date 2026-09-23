@@ -10,7 +10,7 @@ alerting:
     headers:
       Content-Type: "application/x-www-form-urlencoded"
       Authorization: "Basic ${ZULIP_BASIC_AUTH}"
-    body: "type=stream&to=PDC&topic=monitoring&content=ALERT:%20[ENDPOINT_NAME]%20status%20changed.%20Check%20the%20status%20page: https%3A//pdc-status-prod.opentechstrategies.com/"
+    body: "type=stream&to=PDC&topic=monitoring&content=[ALERT_DESCRIPTION]"
 
 endpoints:
   - name: PDC main site
@@ -21,9 +21,9 @@ endpoints:
       - "[STATUS] == 200"
     alerts:
       - type: custom
-        description: "Healthcheck failed for philanthropydatacommons.org"
+        description: "[ALERT_TRIGGERED_OR_RESOLVED]:%20PDC%20main%20site.%20See:%20https://pdc-status-prod.opentechstrategies.com/endpoints/frontend_pdc-main-site"
         send-on-resolved: true
-        failure-threshold: 2    
+        failure-threshold: 2
 
   - name: PDC App
     group: frontend
@@ -33,7 +33,7 @@ endpoints:
       - "[STATUS] == 200"
     alerts:
       - type: custom
-        description: "Healthcheck failed for app.philanthropydatacommons.org"
+        description: "[ALERT_TRIGGERED_OR_RESOLVED]:%20PDC%20App.%20See:%20https://pdc-status-prod.opentechstrategies.com/endpoints/frontend_pdc-app"
         send-on-resolved: true
         failure-threshold: 2          
 
@@ -45,7 +45,7 @@ endpoints:
       - "[STATUS] == 200"
     alerts:
       - type: custom
-        description: "Healthcheck failed for exchange.philanthropydatacommons.org"
+        description: "[ALERT_TRIGGERED_OR_RESOLVED]:%20PDC%20Exchange.%20See:%20https://pdc-status-prod.opentechstrategies.com/endpoints/frontend_pdc-exchange"
         send-on-resolved: true
         failure-threshold: 2
 
@@ -57,7 +57,7 @@ endpoints:
       - "[STATUS] == 200"
     alerts:
       - type: custom
-        description: "Healthcheck failed for admin.philanthropydatacommons.org"
+        description: "[ALERT_TRIGGERED_OR_RESOLVED]:%20PDC%20Admin.%20See:%20https://pdc-status-prod.opentechstrategies.com/endpoints/frontend_pdc-admin"
         send-on-resolved: true
         failure-threshold: 2    
 
@@ -69,7 +69,7 @@ endpoints:
       - "[STATUS] == 200"
     alerts:
       - type: custom
-        description: "Healthcheck failed for api.philanthropydatacommons.org"
+        description: "[ALERT_TRIGGERED_OR_RESOLVED]:%20PDC%20API.%20See:%20https://pdc-status-prod.opentechstrategies.com/endpoints/infra_pdc-api"
         send-on-resolved: true
         failure-threshold: 2      
 
@@ -81,7 +81,7 @@ endpoints:
       - "[STATUS] == 200"
     alerts:
       - type: custom
-        description: "Healthcheck failed for auth.philanthropydatacommons.org"
+        description: "[ALERT_TRIGGERED_OR_RESOLVED]:%20PDC%20Keycloak.%20See:%20https://pdc-status-prod.opentechstrategies.com/endpoints/infra_pdc-keycloak"
         send-on-resolved: true
         failure-threshold: 2   
 
@@ -93,7 +93,7 @@ endpoints:
       - "[STATUS] == 200"
     alerts:
       - type: custom
-        description: "Healthcheck failed for auth.test.philanthropydatacommons.org"
+        description: "[ALERT_TRIGGERED_OR_RESOLVED]:%20PDC%20Keycloak%20test.%20See:%20https://pdc-status-prod.opentechstrategies.com/endpoints/infra_pdc-keycloak-test"
         send-on-resolved: true
         failure-threshold: 2
 
@@ -105,7 +105,7 @@ endpoints:
      - "[CONNECTED] == true"
     alerts:
       - type: custom
-        description: "Healthcheck failed for pdc-utilties.opentechstrategies.com"
+        description: "[ALERT_TRIGGERED_OR_RESOLVED]:%20PDC%20utilities%20server.%20See:%20https://pdc-status-prod.opentechstrategies.com/endpoints/infra_pdc-utilities-server"
         send-on-resolved: true
         failure-threshold: 2
 
