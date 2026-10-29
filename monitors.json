@@ -1,0 +1,65 @@
+[
+  {
+    "tag": "pdc-main",
+    "name": "PDC main site",
+    "monitor_type": "API",
+    "status": "ACTIVE",
+    "cron": "*/5 * * * *",
+    "external_url": "https://philanthropydatacommons.org",
+    "type_data": { "url": "https://philanthropydatacommons.org", "method": "GET", "timeout": 10000 }
+  },
+  {
+    "tag": "pdc-api",
+    "name": "PDC API",
+    "monitor_type": "API",
+    "status": "ACTIVE",
+    "cron": "*/5 * * * *",
+    "external_url": "https://api.philanthropydatacommons.org",
+    "type_data": { "url": "https://api.philanthropydatacommons.org", "method": "GET", "timeout": 10000 }
+  },
+  {
+    "tag": "pdc-app",
+    "name": "PDC App",
+    "monitor_type": "API",
+    "status": "ACTIVE",
+    "cron": "*/5 * * * *",
+    "external_url": "https://app.philanthropydatacommons.org",
+    "type_data": { "url": "https://app.philanthropydatacommons.org", "method": "GET", "timeout": 10000 }
+  },
+  {
+    "tag": "pdc-admin",
+    "name": "PDC Admin",
+    "monitor_type": "API",
+    "status": "ACTIVE",
+    "cron": "*/5 * * * *",
+    "external_url": "https://admin.philanthropydatacommons.org",
+    "type_data": { "url": "https://admin.philanthropydatacommons.org", "method": "GET", "timeout": 10000 }
+  },
+  {
+    "tag": "pdc-exchange",
+    "name": "PDC Exchange",
+    "monitor_type": "API",
+    "status": "ACTIVE",
+    "cron": "*/5 * * * *",
+    "external_url": "https://exchange.philanthropydatacommons.org",
+    "type_data": { "url": "https://exchange.philanthropydatacommons.org", "method": "GET", "timeout": 10000 }
+  },
+  {
+    "tag": "pdc-auth",
+    "name": "PDC Auth",
+    "monitor_type": "API",
+    "status": "ACTIVE",
+    "cron": "*/5 * * * *",
+    "external_url": "https://auth.philanthropydatacommons.org",
+    "type_data": { "url": "https://auth.philanthropydatacommons.org", "method": "GET", "timeout": 10000 }
+  },
+  {
+    "tag": "pdc-auth-test",
+    "name": "PDC Auth Test",
+    "monitor_type": "API",
+    "status": "ACTIVE",
+    "cron": "*/5 * * * *",
+    "external_url": "https://auth.test.philanthropydatacommons.org",
+    "type_data": { "url": "https://auth.test.philanthropydatacommons.org", "method": "GET", "timeout": 10000 }
+  }
+]

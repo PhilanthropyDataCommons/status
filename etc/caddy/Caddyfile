@@ -1,0 +1,10 @@
+pdc-status-test.opentechstrategies.com {
+	request_body {
+		max_size 10MB
+	}
+	reverse_proxy 127.0.0.1:3000 {
+		transport http {
+			read_timeout 360s
+		}
+	}
+}
