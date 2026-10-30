@@ -61,5 +61,18 @@
     "cron": "*/5 * * * *",
     "external_url": "https://auth.test.philanthropydatacommons.org",
     "type_data": { "url": "https://auth.test.philanthropydatacommons.org", "method": "GET", "timeout": 10000 }
+  },
+  {
+    "tag": "pdc-utilities",
+    "name": "PDC Utilities",
+    "monitor_type": "PING",
+    "status": "ACTIVE",
+    "cron": "*/5 * * * *",
+    "type_data": {
+      "hosts": [
+        { "type": "IP4", "host": "pdc-utilities.opentechstrategies.com", "timeout": 1000, "count": 3 }
+      ]
+    }
   }
 ]
+
